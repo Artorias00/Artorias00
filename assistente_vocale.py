@@ -11,16 +11,41 @@ from playsound import playsound
 
 #questa funzione converte un numero da stringa ad intero
 def stringanumero(text):
-    stringa = ["Uno", "Due", "Tre", "Quattro", "Cinque", "Sei", "Sette", "Otto", "Nove", "Dieci", "Undici", "Dodici",
-               "Tredici", "Quattordici"
-        , "Quindici", "Sedici", "Diciassette", "Diciotto", "Diciannove", "Venti", "Venticinque", "Trenta",
-               "Trentacinque", "Quaranta", "Quarantacinque"
-        , "Cinquanta", "Cinquantacinque", "Sessanta"]
-    numero = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 25, 30, 35, 40, 45, 50, 55, 60]
-    for i in range(28):
-        if text == stringa[i]:
-            num = numero[i]
-            return num
+    d = {"uno": 1,
+         "due": 2,
+         "tre": 3,
+         "quattro": 4,
+         "cinque": 5,
+         "sei": 6,
+         "sette": 7,
+         "otto": 8,
+         "nove": 9,
+         "dieci": 10,
+         "undici": 11,
+         "dodici": 12,
+         "tredici": 13,
+         "quattordici": 14,
+         "quindici": 15,
+         "sedici": 16,
+         "diciassette": 17,
+         "diciotto": 18,
+         "diciannove": 19,
+         "vent": 20,
+         "trent": 30,
+         "quarant": 40,
+         "cinquant": 50,
+         "sessant": 60,
+         "settant": 70,
+         "ottant": 80,
+         "novant": 90,
+         "cento": 100}
+    
+    n = 0
+    for e in d.keys():
+        if e in text:
+            n += d[e]
+    return n 
+
 #qui creiamo l'istanza per poter utilizzare il riconoscitore vocale di google
 r = sr.Recognizer()
 
