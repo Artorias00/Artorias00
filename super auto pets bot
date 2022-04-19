@@ -1,0 +1,90 @@
+from random import random, randint
+from time import sleep
+import mouse
+n_turno = 1
+monete = 10
+x_squadra = [415, 536, 652, 768, 880]
+y_squadra = 370
+x_shop = [427, 546, 654, 767, 884]
+y_shop = 570
+x_food = [1111, 998]
+x_end_turn = 1289
+y_command = 785
+x_roll = 166
+x_sell = 831
+x_confirm = 1004
+y_decision = 538
+x_back = 522
+
+
+def reset():
+    mouse.move(-3000, -3000, absolute=False, duration=0.1)
+    sleep(0.1)
+
+
+def compra(pos_shop, pos_squadra):
+    global monete
+    monete = - 3
+    reset()
+    mouse.drag(x_shop[pos_shop-1], y_shop, x_squadra[pos_squadra-1] - x_shop[pos_shop-1], y_squadra - y_shop,
+               absolute=False, duration=0.1)
+    sleep(0.1)
+
+
+def freeze(pos_shop):
+    reset()
+    mouse.drag(x_shop[pos_shop - 1], y_shop, x_sell - x_shop[pos_shop - 1], y_command - y_shop,
+               absolute=False, duration=0.1)
+    sleep(0.1)
+
+
+def sell(pos_squadra):
+    global monete
+    monete = + 1
+    reset()
+    mouse.drag(x_squadra[pos_squadra - 1], y_squadra, x_sell - x_squadra[pos_squadra - 1], y_command - y_squadra,
+               absolute=False, duration=0.1)
+    sleep(0.1)
+
+
+def partita():
+    for i in range(20):
+        mouse.click('left')
+        sleep(0.2)
+    sleep(10)
+    mouse.click('left')
+    sleep(1)
+    mouse.click('left')
+    sleep(1)
+
+
+def turno():
+    global n_turno
+    global monete
+    n_turno = + 1
+    monete = 10
+    pass
+
+
+def roll():
+    global monete
+    monete = - 1
+    reset()
+    mouse.move(x_roll, y_command, absolute=False, duration=0.1)
+    sleep(0.1)
+    mouse.click('left')
+    sleep(0.1)
+
+
+def end_turn():
+    reset()
+    mouse.move(x_end_turn, y_command, absolute=False, duration=0.1)
+    sleep(0.1)
+    mouse.click('left')
+    sleep(0.1)
+
+
+sleep(3)
+
+while monete is not 0:
+    roll()
